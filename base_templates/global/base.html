@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda</title>
+    <link rel="stylesheet" href={% static "css/style.css" %}>
+</head>
+<body>
+    <header class="header-content">
+        <div class="title-content">
+            <h1 class="title">Agenda de contatos</h1>
+        </div>
+        <div class="nav-content">
+            <ul>
+                <li>
+                    <a href="#">Adicionar contato</a>
+                </li>
+                <li>
+                    <a href="#">teste</a>
+                </li>
+            </ul>
+        </div>
+        
+    </header>
+    <div class="main"></div>
+    <footer></footer>
+    {% block index %} {% endblock index %}
+</body>
+</html>
