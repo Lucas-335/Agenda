@@ -8,24 +8,35 @@
     <link rel="stylesheet" href={% static "css/style.css" %}>
 </head>
 <body>
-    <header class="header-content">
+    <header class="header">
         <div class="title-content">
-            <h1 class="title">Agenda de contatos</h1>
+            <h1 class="title">
+                <a href="{% url "contact:index" %}">Agenda de contatos</a>
+            </h1>
         </div>
         <div class="nav-content">
             <ul>
                 <li>
-                    <a href="#">Adicionar contato</a>
+                    <a href="{% url "contact:add" %}">Adicionar contato</a>
                 </li>
                 <li>
-                    <a href="#">teste</a>
+                    <a href="#">Link 2</a>
                 </li>
             </ul>
         </div>
         
+        <form action="{% url "contact:search" %}" method="get">
+            <input type="search" class="search-content" placeholder="Pesquisar" name='q' value={{q}}>
+        </form>
     </header>
-    <div class="main"></div>
-    <footer></footer>
-    {% block index %} {% endblock index %}
+    <div class="main">
+        {% block index %}{% endblock index %}
+        {% block add %}{% endblock add %}
+        {% block sgcontact %}{% endblock sgcontact %}
+    </div>
+    <!-- <footer class="footer">
+        <p>Cabeçalho</p>
+    </footer> -->
+    
 </body>
 </html>
