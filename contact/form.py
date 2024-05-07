@@ -1,6 +1,7 @@
 from django import forms
 from contact.models import Contact
 from django.core.exceptions import NON_FIELD_ERRORS
+from django.db import models
 
 class ContactForm(forms.ModelForm):
     class Meta:

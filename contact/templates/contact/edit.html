@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% block add %}
+{% block edit %}
     <div class="main-content">
         <div class="contact-content">
             <div class="row-content">
-                <h2>Criação de contato</h2>
+                <h2>Edição de contato</h2>
             </div>
             <div class="row-content">
-                <form action="{% url "contact:add" %}" method="post" class="add-form">
+                <form action="{% url "contact:edit" contato.id %}" method="post" class="edit-form">
                     {% csrf_token %}
                     
 
@@ -19,8 +19,7 @@
                         {% endfor %}
                         
                         <div class="div-button">
-                            <input type="submit" value="Adicionar" class="button-form">
-                            <input type="reset" value="Resetar" class="button-form">
+                            <input type="submit" value="Salvar" class="button-form">
                             <button type="button" class="button-form">
                                 <a href="{% url "contact:index" %}" style="color: inherit;">
                                     Cancelar
@@ -32,4 +31,4 @@
             </div>
         </div>
     </div>
-{% endblock add %}
+{% endblock edit %}

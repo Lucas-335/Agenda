@@ -74,7 +74,6 @@ def single_contact(request, num):
     contato = Contact.objects.get(id__exact=num)
     context = {
             'contato':contato,
-            'delete':'Deletar',
             }
     return render(
         request,
@@ -102,4 +101,24 @@ def delete(request,num):
         return redirect('contact:index')
     
 def edit(request, num):
-    return redirect('contact:index')
+
+    contato = Contact.objects.get(id__exact=num)
+    
+    if request.method == 'POST':
+        form = ContactForm(request.POST, instance=contato)
+
+        if form.is_valid():
+            form.save()
+            return redirect('contact:index')
+
+    form = ContactForm(instance=contato)
+    context = {
+        'contato':contato,
+        'form':form,
+    }
+    return render(
+        request,
+        'contact/edit.html',
+        context=context
+
+    )

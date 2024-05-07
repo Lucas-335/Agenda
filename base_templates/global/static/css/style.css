@@ -40,10 +40,6 @@ a{
     height: 20vh;
 }
 
-/* .footer{
-    height: 15vh;
-} */
-
 .main{
     height: 70vh;
 }
@@ -89,6 +85,25 @@ a{
     margin: 10px 0;
     border-radius: 10px;
     font-size: 1em;
+}
+
+.contact-content{
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.row-content{
+    padding: var(--spacing);
+}
+
+.row-content h2{
+    text-align: center;
+}
+
+.div-button{
+    text-align: center;
 }
 
 /* --------------MAIN-------------- */
@@ -145,11 +160,6 @@ a{
 .table-link:hover{
     color: var(--color-black);
 }
-/* td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-} */
 
 .pagination{
     text-align: center;
@@ -167,22 +177,6 @@ a{
 }
 
 /* --------------ADD CONTACT-------------- */
-
-.add-content{
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;  
-}
-
-.add-row-content{
-    padding: var(--spacing);
-    width: 60%;
-}
-
-.add-row-content h2{
-    text-align: center;
-}
 
 .form-field-content{
     display: grid;
@@ -214,10 +208,6 @@ a{
     margin: 15px 5px 0 5px;
 }
 
-.div-button{
-    text-align: center;
-}
-
 .add-form .div-button input:nth-child(1){
     background-color: var(--save-button-color);
     border: 1px solid var(--save-button-color);
@@ -235,22 +225,6 @@ a{
 
 /* --------------SINGLE CONTACT-------------- */
 
-.sg-contact-content{
-    width: 60%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-}
-.sg-contact-title{
-    margin: var(--spacing);
-    text-align: center;
-}
-
-.sg-contact-list{
-    margin: var(--spacing);
-    text-align: center;
-}
-
 .sg-contact-item{
     margin: var(--spacing);
 }
@@ -265,6 +239,18 @@ a{
 }
 
 .sgcontact-form .div-button button:nth-of-type(2){
+    background-color: var(--cancel-button-color);
+    border: 1px solid var(--cancel-button-color);
+}
+
+/* --------------EDIT CONTACT-------------- */
+
+.edit-form .div-button input{
+    background-color: var(--save-button-color);
+    border: 1px solid var(--save-button-color);
+}
+
+.edit-form .div-button button{
     background-color: var(--cancel-button-color);
     border: 1px solid var(--cancel-button-color);
 }
