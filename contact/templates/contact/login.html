@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block login %}
+<div class="main-content">
+    <div class="contact-content">
+
+        {% if not user.is_authenticated %}
+        <div class="row-content">
+            <h2>Login de usuário</h2>
+        </div>
+        <div class="row-content">
+            <form action="{% url "contact:login" %}" method="post" class="login-form" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+
+                    {% for field in form %}
+                        <div class="field-content">
+                            <label for="field.id_for_label" class="field-label">{{field.label}}</label>                    
+                            {{field}}
+                            {% if field.errors %}<span class='field-error'>{{field.errors}}</span>{% endif %}
+                            {% if field.help_text %}<span class='field-help-text'>{{field.help_text}}</span>{% endif %}
+                        </div>
+                    {% endfor %}
+                    
+                    <div class="div-button">
+                        <input type="submit" value="Logar" class="button-form green-button">
+                        <button type="button" class="button-form red-button">
+                            <a href="{% url "contact:index" %}" style="color: inherit;">
+                                Cancelar
+                            </a>
+                        </button>
+                    </div>
+                
+            </form>
+        </div>
+        {% else %}
+        <div class="row-content">
+            <h2>Usuário</h2>
+        </div>
+        <div class="row-content">
+            <ul class="sg-contact-list">
+                <li class="sg-contact-item">
+                    <p>Usuário: {{user}}</p>
+                </li>
+                <li class="sg-contact-item">
+                    <p>Nome: {{user.first_name}}</p>
+                </li>
+                <li class="sg-contact-item">
+                    <p>Sobrenome: {{user.last_name}}</p>
+                </li>
+                <li class="sg-contact-item">
+                    <p>Email: {{user.email}}</p>
+                </li>
+                <li class="sg-contact-item">
+                    <p>Clique <a href={% url "contact:logout" %}>AQUI</a> para sair.</p>
+                </li>
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock login %}
+

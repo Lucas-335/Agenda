@@ -1,39 +1,14 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenda</title>
-    <link rel="stylesheet" href={% static "css/style.css" %}>
-</head>
-<body>
-    <header class="header">
-        <div class="title-content">
-            <h1 class="title">
-                <a href="{% url "contact:index" %}">Agenda de contatos</a>
-            </h1>
-        </div>
-        <div class="nav-content">
-            <ul>
-                <li>
-                    <a href="{% url "contact:add" %}">Adicionar contato</a>
-                </li>
-                <li>
-                    <a href="#">Link 2</a>
-                </li>
-            </ul>
-        </div>
-        
-        <form action="{% url "contact:search" %}" method="get">
-            <input type="search" class="search-content" placeholder="Pesquisar" name='q' value={{q}}>
-        </form>
-    </header>
+{% include "partials/head.html" %}
+<body>       
+    {% include "partials/header.html" %}
     <div class="main">
+        {% include "partials/messages.html" %}
         {% block index %}{% endblock index %}
         {% block add %}{% endblock add %}
         {% block sgcontact %}{% endblock sgcontact %}
         {% block edit %}{% endblock edit %}
+        {% block register %}{% endblock register %}
+        {% block login %}{% endblock login %}
     </div>
     <!-- <footer class="footer">
         <p>Cabeçalho</p>

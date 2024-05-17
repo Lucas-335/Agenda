@@ -1,31 +1,27 @@
 {% extends "base.html" %}
-{% block edit %}
+{% block register %}
     <div class="main-content">
         <div class="contact-content">
             <div class="row-content">
-                <h2>Edição de contato</h2>
+                <h2>Criação de usuário</h2>
             </div>
             <div class="row-content">
-                <form action="{% url "contact:edit" contato.id %}" method="post" class="edit-form" enctype="multipart/form-data">
+                <form action="{% url "contact:register" %}" method="post" class="register-form" enctype="multipart/form-data">
                     {% csrf_token %}
                     
 
                         {% for field in form %}
                             <div class="field-content">
-                                {% if field.label != 'Foto' %}
-                                    <label for="field.id_for_label" class="field-label">{{field.label}}</label>                    
-                                    {{field}}
-                                    {{field.errors}}
-                                {% else %}
-                                    <label for="field.id_for_label" class="field-label">{{field.label}}</label>
-                                    <br>
-                                    {{field}}
-                                {% endif %}
+                                <label for="field.id_for_label" class="field-label">{{field.label}}</label>                    
+                                {{field}}
+                                {% if field.errors %}<span class='field-error'>{{field.errors}}</span>{% endif %}
+                                {% if field.help_text %}<span class='field-help-text'>{{field.help_text}}</span>{% endif %}
                             </div>
                         {% endfor %}
                         
                         <div class="div-button">
                             <input type="submit" value="Salvar" class="button-form green-button">
+                            <input type="reset" value="Resetar" class="button-form yellow-button">
                             <button type="button" class="button-form red-button">
                                 <a href="{% url "contact:index" %}" style="color: inherit;">
                                     Cancelar
@@ -37,4 +33,4 @@
             </div>
         </div>
     </div>
-{% endblock edit %}
+{% endblock register %}

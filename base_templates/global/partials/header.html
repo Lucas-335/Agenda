@@ -1,0 +1,27 @@
+<header class="header">
+    <div class="title-content">
+        <h1 class="title">
+            <a href="{% url "contact:index" %}">Agenda de contatos</a>
+        </h1>
+    </div>
+    <div class="nav-content">
+        <ul>
+            <li>
+                <a href="{% url "contact:add" %}">Adicionar contato</a>
+            </li>
+            <li>
+                <a href="{% url "contact:register" %}">Registrar-se</a>
+            </li>
+            <li>
+                {% if not user.is_authenticated %}
+                    <a href="{% url "contact:login" %}">Logar</a>
+                {% else %}
+                <a href="{% url "contact:login" %}">Perfil</a>
+                    {% endif %}
+            </li>
+        </ul>
+    </div>
+    <form action="{% url "contact:search" %}" method="get">
+        <input type="search" class="search-content" placeholder="Pesquisar" name='q' value={{q}}>
+    </form>
+</header>

@@ -24,19 +24,23 @@
                         <li class="sg-contact-item">
                             <span class="label-item">Categoria:</span> {{contato.category}}</li>
                     {% endif %}
+                    {% if contato.image %}
+                        <li class="sg-contact-item">
+                            <img src="{{contato.image.url}}" alt=f"{{contato.name}} {{contato.last_name}}">
+                    {% endif %}
                     
                     <form action="{% url "contact:delete" contato.id %}" method="post" class="sgcontact-form">
                         <div class="div-button">
                             {% csrf_token %}
 
-                            <button type="button" class="button-form">
+                            <button type="button" class="button-form yellow-button">
                                 <a href="{% url "contact:edit" contato.id %}" style="color: inherit;">Editar</a>
                             </button>
 
                             {% if confirmation == 'yes' %}
-                                <button type="submit" class="button-form">Confirma?</button>
+                                <button type="submit" class="button-form red-button">Confirma?</button>
                             {% else %}
-                                <button type="submit" class="button-form">Delete</button>
+                                <button type="submit" class="button-form red-button">Delete</button>
                                 <input type="hidden" name='confirmation' id="confirmation" value="no">
                             {% endif %}
                             

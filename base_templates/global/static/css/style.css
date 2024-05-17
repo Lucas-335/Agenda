@@ -9,7 +9,7 @@
     --input-border-radius: 0.3rem;
     --input-border: 1px rgb(146, 139, 139) solid;
     --save-button-color: rgb(6, 168, 6);
-    --reset-button-color: rgb(255, 196, 0);
+    --reset-button-color: rgb(240, 184, 0);
     --cancel-button-color: rgb(223, 10, 10);
 }
 
@@ -106,6 +106,52 @@ a{
     text-align: center;
 }
 
+/* --------------BUTTONS-------------- */
+.green-button{
+    background-color: var(--save-button-color);
+    border: 1px solid var(--save-button-color);
+}
+
+.yellow-button{
+    background-color: var(--reset-button-color);
+    border: 1px solid var(--reset-button-color);
+}
+
+.red-button{
+    background-color: var(--cancel-button-color);
+    border: 1px solid var(--cancel-button-color);
+}
+
+/* --------------MESSAGES-------------- */
+
+.message{
+    text-align: center;
+    padding: 5px;
+    max-width: 500px;
+    margin: var(--spacing) auto;
+    padding: 20px 0;
+    border-radius: 4px;
+}
+
+.message.success{
+    border-color: green;
+    background-color: rgba(0, 128, 0, 0.555);
+}
+
+.message.error{
+    border: 1px solid red;
+    background: rgba(255, 0, 0, 0.555);
+}
+
+.message.warning{
+    border: 1px solid yellow;
+    background: rgba(255, 255, 0, 0.555);
+}
+
+.message.info{
+    border: 1px solid rgb(0, 0, 255);
+    background-color: rgba(0, 0, 255, 0.555);
+}
 /* --------------MAIN-------------- */
 
 .main-content{
@@ -114,9 +160,9 @@ a{
     background-color: rgb(245, 245, 255);
     box-shadow: 2px 2px 5px rgba(0, 0, 10, 50%);
     border-radius: 4px;
-    overflow-x: auto;
-    
+    overflow-x: auto;    
 }
+
 .responsive-table{
     width: 100%;
     overflow-x: auto;
@@ -176,7 +222,7 @@ a{
     color: var(--color-black);
 }
 
-/* --------------ADD CONTACT-------------- */
+/* --------------ADD CONTACT / REGISTER USER-------------- */
 
 .form-field-content{
     display: grid;
@@ -191,7 +237,8 @@ a{
     font-weight: bold;
 }
 
-.input-field{
+.field-content input,
+.field-content select{
     padding: var(--padding-input);
     width: 100%;
     margin: var(--spacing-input);
@@ -199,6 +246,15 @@ a{
     border: var(--input-border);
 }
 
+.field-help-text{
+    color: rgb(47, 47, 199);
+    font-size: 0.7rem;
+}
+
+.field-error{
+    color: rgb(252, 21, 21);
+    font-size: 0.9rem;
+}
 .button-form{
     padding: var(--padding-input);
     border-radius: var(--input-border-radius);
@@ -208,22 +264,11 @@ a{
     margin: 15px 5px 0 5px;
 }
 
-.add-form .div-button input:nth-child(1){
-    background-color: var(--save-button-color);
-    border: 1px solid var(--save-button-color);
-}
-
-.add-form .div-button input:nth-child(2){
-    background-color: var(--reset-button-color);
-    border: 1px solid var(--reset-button-color);
-}
-
-.add-form .div-button button{
-    background-color: var(--cancel-button-color);
-    border: 1px solid var(--cancel-button-color);
-}
-
 /* --------------SINGLE CONTACT-------------- */
+
+.sg-contact-list{
+    text-align: center;
+}
 
 .sg-contact-item{
     margin: var(--spacing);
@@ -233,24 +278,3 @@ a{
     font-weight: bold;
 }
 
-.sgcontact-form .div-button button:nth-of-type(1){
-    background-color: var(--reset-button-color);
-    border: 1px solid var(--reset-button-color);
-}
-
-.sgcontact-form .div-button button:nth-of-type(2){
-    background-color: var(--cancel-button-color);
-    border: 1px solid var(--cancel-button-color);
-}
-
-/* --------------EDIT CONTACT-------------- */
-
-.edit-form .div-button input{
-    background-color: var(--save-button-color);
-    border: 1px solid var(--save-button-color);
-}
-
-.edit-form .div-button button{
-    background-color: var(--cancel-button-color);
-    border: 1px solid var(--cancel-button-color);
-}

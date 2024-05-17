@@ -1,8 +1,15 @@
 from django.shortcuts import render, redirect
 from contact.models import Contact
 from django.core.paginator import Paginator
-from contact.form import ContactForm
-from django.urls import reverse
+from contact.form import ContactForm, RegisterForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+
+#from django.urls import reverse
+
+#from PIL import Image
 # Create your views here.
 
 def index(request):
@@ -51,11 +58,10 @@ def search(request):
 def add(request):
     if request.method == 'POST':
 
-        form = ContactForm(request.POST)
+        form = ContactForm(request.POST, request.FILES)
 
         if form.is_valid():
             form.save()
-            
             return redirect("contact:index")
     else:
         form = ContactForm()
@@ -70,8 +76,12 @@ def add(request):
         )
 
 def single_contact(request, num):
-    
+
     contato = Contact.objects.get(id__exact=num)
+    # print(type(contato.image))
+    # contato.image = contato.resize_img(contato.image)
+    # print(type(contato.image))
+    # out.show()
     context = {
             'contato':contato,
             }
@@ -105,7 +115,7 @@ def edit(request, num):
     contato = Contact.objects.get(id__exact=num)
     
     if request.method == 'POST':
-        form = ContactForm(request.POST, instance=contato)
+        form = ContactForm(request.POST, request.FILES, instance=contato)
 
         if form.is_valid():
             form.save()
@@ -122,3 +132,67 @@ def edit(request, num):
         context=context
 
     )
+
+def register(request):
+    form = RegisterForm()
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.info(request,'Usuário salvo')
+
+            return redirect('contact:index')
+        # return redirect('contact:index')
+        messages.error(request,'Usuário não salvo')
+
+    context = {
+        'form':form,
+    }
+    return render(
+        request,
+        'contact/register.html',
+        context=context,
+    )
+
+def login_view(request):
+
+    form=AuthenticationForm(request)
+    
+    if request.user:
+        user_name = request.user
+        try:
+            user_data = User.objects.get(username=user_name)
+            print(user_data.username)
+        except:
+            pass
+
+    if request.method == 'POST':
+        form=AuthenticationForm(request,data=request.POST)
+
+        if form.is_valid():
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(request,username=username,password=password)
+
+            if user is not None:
+                login(request,user)
+                messages.success(request,'Usuário foi logado')
+
+                return redirect('contact:index')
+            
+        else:
+            messages.error(request,'Login inválido')
+            
+    context={
+        'form':form,
+    }
+    return render(
+        request,
+        'contact/login.html',
+        context=context,
+    )
+
+def logout_view(request):
+    logout(request)
+    return redirect('contact:index')
