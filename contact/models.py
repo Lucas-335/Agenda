@@ -1,8 +1,8 @@
 from django.db import models
-from PIL import Image, ImageOps
+from PIL import Image
 from io import BytesIO
 from django.core.files import File
-from django.core.files.images import ImageFile
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Contact(models.Model):
@@ -41,7 +41,11 @@ class Contact(models.Model):
         null=True,
         upload_to='media/photos',
     )
-
+    owner = models.ForeignKey(
+        to=User,
+        on_delete=models.CASCADE,
+        null=True,
+    )
 
     def __str__(self):
         return f'{self.name} {self.last_name}'

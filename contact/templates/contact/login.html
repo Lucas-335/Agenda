@@ -33,28 +33,47 @@
             </form>
         </div>
         {% else %}
-        <div class="row-content">
-            <h2>Usuário</h2>
-        </div>
-        <div class="row-content">
-            <ul class="sg-contact-list">
-                <li class="sg-contact-item">
-                    <p>Usuário: {{user}}</p>
-                </li>
-                <li class="sg-contact-item">
-                    <p>Nome: {{user.first_name}}</p>
-                </li>
-                <li class="sg-contact-item">
-                    <p>Sobrenome: {{user.last_name}}</p>
-                </li>
-                <li class="sg-contact-item">
-                    <p>Email: {{user.email}}</p>
-                </li>
-                <li class="sg-contact-item">
-                    <p>Clique <a href={% url "contact:logout" %}>AQUI</a> para sair.</p>
-                </li>
-            </ul>
-        </div>
+            <div class="row-content">
+                <h2>Usuário</h2>
+            </div>
+            <div class="row-content">
+                <ul class="sg-contact-list">
+                    <li class="sg-contact-item">
+                        <p>Usuário: {{user}}</p>
+                    </li>
+                    <li class="sg-contact-item">
+                        <p>Nome: {{user.first_name}}</p>
+                    </li>
+                    <li class="sg-contact-item">
+                        <p>Sobrenome: {{user.last_name}}</p>
+                    </li>
+                    <li class="sg-contact-item">
+                        <p>Email: {{user.email}}</p>
+                    </li>
+                    
+                </ul>
+            </div>
+
+            <div class="row-content">
+                <form action={% url 'contact:delete-user' %} method="post">
+                    {% csrf_token %}
+                    <div class="div-button">
+                        <button type="button" class="button-form yellow-button">
+                            <a href="{% url "contact:chpassword" %}" style="color: inherit;">
+                                Trocar Senha
+                            </a>
+                        </button>
+                        {% if confirm != 'yes' %}
+                            <button type="submit" class="button-form red-button">Deletar conta</button>
+                            <input type="hidden" value="no" id='confirm' name='confirm'> 
+
+                        {% else %}
+                            <button type="submit" class="button-form red-button">Confirma?</button>
+                            <input type="hidden" value="yes" id='confirm' name='confirm'>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
         {% endif %}
     </div>
 </div>

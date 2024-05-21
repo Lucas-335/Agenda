@@ -8,7 +8,7 @@ class ContactAdmin(admin.ModelAdmin):
         (
             'Contato',
             {
-                'fields':[('name','last_name'),'number','email','category','image'],
+                'fields':[('name','last_name'),'number','email','category','image','owner'],
                 'description':['Informações do contato']
             }
         ),

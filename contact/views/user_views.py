@@ -1,16 +1,11 @@
 from django.shortcuts import render, redirect
 from contact.models import Contact
 from django.core.paginator import Paginator
-from contact.form import ContactForm, RegisterForm
-from django.contrib.auth.forms import AuthenticationForm
+from contact.form import RegisterForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.models import User
-
-#from django.urls import reverse
-
-#from PIL import Image
-# Create your views here.
 
 def index(request):
 
@@ -55,84 +50,6 @@ def search(request):
         context = context,
     )
 
-def add(request):
-    if request.method == 'POST':
-
-        form = ContactForm(request.POST, request.FILES)
-
-        if form.is_valid():
-            form.save()
-            return redirect("contact:index")
-    else:
-        form = ContactForm()
-
-    context = {
-        'form': form,
-    }
-    return render(
-        request,
-        'contact/add.html',
-        context=context
-        )
-
-def single_contact(request, num):
-
-    contato = Contact.objects.get(id__exact=num)
-    # print(type(contato.image))
-    # contato.image = contato.resize_img(contato.image)
-    # print(type(contato.image))
-    # out.show()
-    context = {
-            'contato':contato,
-            }
-    return render(
-        request,
-        'contact/sgcontact.html',
-        context=context,
-        )
-
-def delete(request,num):
-    
-    confirmation = request.POST.get('confirmation')
-    
-    if confirmation == 'no':
-
-        contato = Contact.objects.get(id__exact=num)
-        context= {
-            'contato':contato,
-            'confirmation':'yes'
-        }
-        # contato.delete()
-        # return redirect("contact:delete", num)
-        return render(request,'contact/sgcontact.html',context=context)
-    else:
-        contato = Contact.objects.get(id__exact=num)
-        contato.delete()
-        return redirect('contact:index')
-    
-def edit(request, num):
-
-    contato = Contact.objects.get(id__exact=num)
-    
-    if request.method == 'POST':
-        form = ContactForm(request.POST, request.FILES, instance=contato)
-
-        if form.is_valid():
-            form.save()
-            return redirect('contact:index')
-
-    form = ContactForm(instance=contato)
-    context = {
-        'contato':contato,
-        'form':form,
-    }
-    return render(
-        request,
-        'contact/edit.html',
-        context=context
-
-    )
-
 def register(request):
     form = RegisterForm()
     if request.method == 'POST':
@@ -158,14 +75,6 @@ def register(request):
 def login_view(request):
 
     form=AuthenticationForm(request)
-    
-    if request.user:
-        user_name = request.user
-        try:
-            user_data = User.objects.get(username=user_name)
-            print(user_data.username)
-        except:
-            pass
 
     if request.method == 'POST':
         form=AuthenticationForm(request,data=request.POST)
@@ -177,7 +86,7 @@ def login_view(request):
 
             if user is not None:
                 login(request,user)
-                messages.success(request,'Usuário foi logado')
+                messages.success(request,'Usuário logado')
 
                 return redirect('contact:index')
             
@@ -195,4 +104,46 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
+    messages.success(request,'Usuário deslogado')
     return redirect('contact:index')
+
+def change_password(request):
+    form = PasswordChangeForm(request.user)
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, "Sua senha foi alterada com sucesso!")
+            return redirect('contact:login')
+        else:
+            messages.error(request, "Por favor, coloque uma senha válida")
+
+    context = {
+        'form':form,
+    }
+    return render(
+        request,
+        'contact/chpassword.html',
+        context=context
+    )
+
+def delete_user(request):
+
+    confirm = request.POST['confirm']
+
+    if confirm == 'yes':
+        usuario = User.objects.get(username=request.user)
+        usuario.delete()
+        messages.success(request,'Usuário deletado com sucesso')
+        return redirect('contact:index')
+    
+    context={
+        'confirm':'yes',
+    }
+
+    return render(
+        request,
+        'contact/login.html',
+        context=context,
+    )
