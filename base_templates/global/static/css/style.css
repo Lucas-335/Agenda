@@ -3,6 +3,7 @@
     --table-mobile-min-width: 30rem;
     --spacing: 1.3rem;
     --spacing-mobile:0.8rem;
+    --spacing-tablet: 1rem;
     --medium-font-size: 1.4rem;
     --color-black: rgb(0, 0, 30);
     --color-link: rgb(82, 19, 134);
@@ -350,6 +351,12 @@ a{
     }
 }
 
+@media only screen and (max-height: 680px){
+    .header{
+        height: 35vh;
+    }
+}
+
 @media only screen and (max-width: 600px) {
 
     /* --------------HEADER-------------- */
@@ -464,13 +471,141 @@ a{
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {...}
+@media only screen and (min-width: 600px) and (max-width: 992px) {
+    body{
+        font-size: 1.3rem;
+    }
 
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {...}
+    h2{
+        font-size: 3rem;
+    }
 
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {...}
+    h3{
+        font-size: 2.5rem;
+    }
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {...}
+    /* --------------HEADER-------------- */
+
+    .header-content{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; 
+    }
+
+    .title{
+        font-size: 3.5rem;
+    }
+
+    .nav-content{
+        margin-bottom: 10px;
+    }
+
+    .nav-content ul li{
+        display: block;
+        padding: 3px;
+    }
+    
+    .nav-content a {
+        min-width: 7rem;
+        font-size: 1.2rem;
+        padding: 0.5rem;
+    }
+
+    /* --------------MAIN-------------- */
+    .main-content{
+        max-width: 100%;
+        border-radius: 0;
+    }
+
+    .table-content {
+        min-width: 100%;
+          }
+    
+    .table-caption div{
+        flex-direction: column;
+        justify-content: center;
+        max-width: 20rem;
+    }
+    
+    .search-icon{
+        right: 7px;
+        top: 13px;
+    }
+
+    .search-content{
+        padding: 5px 25px 5px 10px;
+        margin: 3px 0;
+        border-radius: 10px;
+        font-size: 0.9em;
+        min-width: 20rem;
+        border: 1px solid var(--input-border);
+    }
+
+    .table-row{
+        text-overflow: ellipsis;
+        text-align: left;
+    }
+    
+    .table-cel,
+    .table-header{
+        padding: var(--spacing-tablet);
+    }
+
+    .pagination{
+        padding: 20px;
+    }
+    
+/* --------------ADD CONTACT / REGISTER USER-------------- */
+
+    .contact-content{
+        width: 100%;
+    }
+
+    .field-content input,
+    .field-content select{
+    padding: 0.7rem 0.5rem;
+    width: 95%;
+    font-size: 1rem;
+}
+
+    .field-help-text{
+        font-size: 0.9rem;
+    }
+
+    .field-error{
+        font-size: 1rem;
+    }
+
+    .button-form{
+        font-size: 1rem;
+    }
+    .button-form.button-padding{
+        padding: 0.8rem 0.5rem;
+    }
+
+    .button-form a{
+        padding: 0.8rem 0.5rem;
+        display: inline-block;
+    }
+/* --------------SINGLE CONTACT-------------- */
+
+    .mobile-title h2{
+        text-align: left;
+    }
+
+    .row-content .back-button{
+        padding: 8px;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+    }
+
+    .sg-contact-list{
+        text-align: left;
+    }
+
+    .sg-contact-item{
+        margin: var(--spacing-mobile) 0;
+    }
+}
+
