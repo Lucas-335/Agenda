@@ -33,7 +33,7 @@ def search(request):
             list_contacts.add(i)
         elif i.last_name.lower() == q:
             list_contacts.add(i)
-        elif q in i.number:
+        elif q in str(i.number):
             list_contacts.add(i)
     list_contacts = list(list_contacts)
     p = Paginator(list_contacts,8)

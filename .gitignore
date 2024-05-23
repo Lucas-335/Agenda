@@ -6,6 +6,7 @@ __pycache__
 db.sqlite3
 media
 project/local_settings.py
+repo
 
 # Backup files # 
 *.bak 

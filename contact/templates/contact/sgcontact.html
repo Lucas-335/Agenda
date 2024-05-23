@@ -3,8 +3,9 @@
 {% block sgcontact %}
     <div class="main-content">
         <div class="contact-content">
-            <div class="row-content">
+            <div class="row-content mobile-title">
                 <h2>Contato</h2>
+                <a href={% url "contact:index" %} class="back-button">Voltar</a>
             </div>
             
             <div class="row-content">
@@ -40,9 +41,9 @@
                                 </button>
 
                                 {% if confirmation == 'yes' %}
-                                    <button type="submit" class="button-form red-button">Confirma?</button>
+                                    <button type="submit" class="button-form button-padding red-button">Confirma?</button>
                                 {% else %}
-                                    <button type="submit" class="button-form red-button">Delete</button>
+                                    <button type="submit" class="button-form button-padding red-button">Delete</button>
                                     <input type="hidden" name='confirmation' id="confirmation" value="no">
                                 {% endif %}
                             </div>

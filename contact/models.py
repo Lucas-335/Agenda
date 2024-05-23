@@ -17,7 +17,7 @@ class Contact(models.Model):
         max_length=255,
         null=False,
     )
-    number = models.IntegerField(
+    number = models.BigIntegerField(
         verbose_name='Telefone',
         max_length=13,
         null=False,

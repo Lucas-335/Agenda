@@ -1,16 +1,20 @@
 :root{
     --table-min-width: 60rem;
+    --table-mobile-min-width: 30rem;
     --spacing: 1.3rem;
+    --spacing-mobile:0.8rem;
     --medium-font-size: 1.4rem;
     --color-black: rgb(0, 0, 30);
     --color-link: rgb(82, 19, 134);
     --spacing-input: 0.3rem 0;
     --padding-input: 0.5rem 0.3rem;
     --input-border-radius: 0.3rem;
+    --button-border-radius: 18px;
     --input-border: 1px rgb(146, 139, 139) solid;
     --save-button-color: rgb(6, 168, 6);
     --reset-button-color: rgb(240, 184, 0);
     --cancel-button-color: rgb(223, 10, 10);
+    --purple-background: rgba(87, 87, 182, 0.952);
 }
 
 *{
@@ -36,19 +40,31 @@ a{
     color: black;
 }
 
-.header{
-    height: 20vh;
-}
-
 .main{
     height: 70vh;
 }
+
+
+
+/* --------------HEADER-------------- */
+
 .header{
-    background-image: linear-gradient(to right,rgba(87, 87, 182, 0.952),rgb(87, 87, 182));
+    background-image: linear-gradient(to right,var(--purple-background),rgb(87, 87, 182));
+    height: 20vh;
+}
+
+.header-content{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    max-width: 80rem;
+    margin: 0 auto;
+    height: inherit;
+}
+
+.icon{
+    color: white;
 }
 
 .title-content{
@@ -61,7 +77,7 @@ a{
     font-size: 50px;
 }
 
-.title a{
+.title-white{
     color: #fff;
 }
 
@@ -76,37 +92,20 @@ a{
 }
 
 .nav-content a {
+    display: inline-block;
     background-color: inherit;
     color: #fff;
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: var(--button-border-radius);
 }
 
-.search-content{
-    padding: 12px 10px;
-    margin: 10px 0;
-    border-radius: 10px;
-    font-size: 1em;
-}
-
-.contact-content{
-    width: 60%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-}
-
-.row-content{
-    padding: var(--spacing);
-}
-
-.row-content h2{
-    text-align: center;
-}
+/* --------------BUTTONS-------------- */
 
 .div-button{
     text-align: center;
 }
 
-/* --------------BUTTONS-------------- */
 .green-button{
     background-color: var(--save-button-color);
     border: 1px solid var(--save-button-color);
@@ -179,8 +178,35 @@ a{
     padding: var(--spacing);
     font-size: var(--medium-font-size);
     font-weight: bold;
+    background-color: var(--purple-background);
 }
 
+.table-caption div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.table-caption div form{
+    position: relative;
+}
+
+.search-content{
+    padding: 5px 25px 5px 10px;
+    margin: 3px 0;
+    border-radius: 10px;
+    font-size: 0.63em;
+    min-width: 22rem;
+    border: 1px solid var(--input-border);
+}
+
+.search-icon{
+    position: absolute; 
+    right: 8px; 
+    top: 8px; 
+    font-size: 1rem; 
+    color: rgba(0, 0, 0, 0.507);
+}
 .table-row{
     text-overflow: ellipsis;
     text-align: left;
@@ -191,7 +217,7 @@ a{
 }
 
 .table-row-header{
-    background: rgb(110, 110, 182) !important; 
+    /* background: rgba(110, 110, 182, 0.397) !important;  */
     color: var(--color-black);
 }
 
@@ -213,8 +239,7 @@ a{
 }
 
 .pagination span a{
-    display: inline-block;
-    
+    display: inline-block;  
     color: var(--color-link);
 }
 
@@ -256,7 +281,6 @@ a{
     font-size: 0.9rem;
 }
 .button-form{
-    padding: var(--padding-input);
     border-radius: var(--input-border-radius);
     border: var(--input-border);
     cursor: pointer;
@@ -264,6 +288,41 @@ a{
     margin: 15px 5px 0 5px;
 }
 
+.button-form.button-padding{
+    padding: var(--padding-input);
+}
+
+.button-form a{
+    padding: var(--padding-input);
+    display: inline-block;
+}
+
+.contact-content{
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.row-content{
+    padding: var(--spacing);
+    position: relative;
+}
+
+.row-content h2{
+    text-align: center;
+}
+
+.row-content .back-button{
+    padding: 8px;
+    position: absolute;
+    right: -200px;
+    top: 20px;
+    border: 1px solid var(--purple-background);
+    background-color: var(--purple-background);
+    color: #fff;
+    border-radius: var(--button-border-radius);
+}
 /* --------------SINGLE CONTACT-------------- */
 
 .sg-contact-list{
@@ -278,3 +337,140 @@ a{
     font-weight: bold;
 }
 
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (min-height: 765px){
+    .header{
+        height: 25vh;
+    }
+}
+
+@media only screen and (max-height: 765px){
+    .header{
+        height: 30vh;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    /* --------------HEADER-------------- */
+
+    .header-content{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; 
+    }
+
+    .title{
+        font-size: 1.7rem;
+    }
+
+    .nav-content{
+        margin-bottom: 10px;
+    }
+    .nav-content ul li{
+        display: block;
+        padding: 3px;
+    }
+    
+    .nav-content a {
+        min-width: 7rem;
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+
+    /* --------------MAIN-------------- */
+    .main-content{
+        max-width: 100%;
+        border-radius: 0;
+    }
+
+    .table-content {
+        min-width: 100%;
+          }
+    
+    .table-caption div{
+        flex-direction: column;
+        justify-content: center;
+        max-width: 15rem;
+    }
+    
+    .search-icon{
+        right: 7px; 
+    }
+
+    .search-content{
+        padding: 5px 25px 5px 10px;
+        margin: 3px 0;
+        border-radius: 10px;
+        font-size: 0.63em;
+        min-width: 15rem;
+        border: 1px solid var(--input-border);
+    }
+
+    .table-row{
+        text-overflow: ellipsis;
+        text-align: left;
+    }
+    
+    .table-cel,
+    .table-header{
+        padding: var(--spacing-mobile);
+    }
+
+    .pagination span{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .pagination span a,
+    .pagination span span{
+        padding: 5px;
+    }
+    
+/* --------------ADD CONTACT / REGISTER USER-------------- */
+
+    .contact-content{
+        width: 100%;
+    }
+
+    .field-content input,
+    .field-content select{
+        padding: var(--padding-input);
+        width: 95%;
+        margin: var(--spacing-input);
+        border-radius: var(--input-border-radius);
+        border: var(--input-border);
+    }
+/* --------------SINGLE CONTACT-------------- */
+
+    .mobile-title h2{
+        text-align: left;
+    }
+
+    .row-content .back-button{
+        padding: 8px;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+    }
+
+    .sg-contact-list{
+        text-align: left;
+    }
+
+    .sg-contact-item{
+        margin: var(--spacing-mobile) 0;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {...}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {...}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {...}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {...}
